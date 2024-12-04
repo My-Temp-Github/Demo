@@ -50,6 +50,8 @@ services:
     depends_on:
       accountsdb:
         condition: service_healthy
+      configserver:
+        condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "accounts"
       SPRING_DATASOURCE_URL: "jdbc:mysql://accountsdb:3306/accountsdb"
@@ -66,6 +68,8 @@ services:
     depends_on:
       loansdb:
         condition: service_healthy
+      configserver:
+        condition: service_healthy
     extends:
       file: common-config.yml
       service: microservice-configserver-config
@@ -80,6 +84,8 @@ services:
       - "9000:9000"
     depends_on:
       cardsdb:
+        condition: service_healthy
+      configserver:
         condition: service_healthy
     environment:
       SPRING_APPLICATION_NAME: "cards"
